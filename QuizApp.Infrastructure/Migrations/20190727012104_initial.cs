@@ -9,19 +9,20 @@ namespace QuizApp.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AspNetRoles",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
+           name: "Questions",
+           columns: table => new
+           {
+               Id = table.Column<int>(nullable: false)
+                   // ADD THIS LINE: tell SQL Server to use an "identity" (auto-increment) column for id
+                   .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                   .Annotation("Sqlite:Autoincrement", true),
+               QuestionType = table.Column<string>(nullable: true),
+               Prompt = table.Column<string>(nullable: true)
+           },
+           constraints: table =>
+           {
+               table.PrimaryKey("PK_Questions", x => x.Id);
+           });
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
