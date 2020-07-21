@@ -8,21 +8,14 @@ namespace QuizApp.Infrastructure.Data
 {
     public class AppDbContext : IdentityDbContext<User>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-          : base(options)
-        {
-
-        }
+       
         public DbSet<Quiz> Quizzes { get; set; }
         public DbSet<Question> Questions { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+         : base(options)
         {
-            base.OnConfiguring(optionsBuilder);
-
-            optionsBuilder.UseSqlite("Data Source=./quizapp.db");
         }
-
+       
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
